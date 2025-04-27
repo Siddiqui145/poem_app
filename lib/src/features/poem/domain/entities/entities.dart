@@ -1,6 +1,13 @@
-
+// 1st Step, just defined the correct structure without json or APIs
     class PoemEntity {
-        // ...
-        // An entity represents a real-world object with a distinct identity. 
+        final String title;
+        final String author;
+        final List lines;
+
+        PoemEntity({
+          required this.title,
+          required this.author,
+          required this.lines,
+        });
     }
     
