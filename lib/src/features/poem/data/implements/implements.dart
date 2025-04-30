@@ -1,17 +1,17 @@
 
-    import '../sources/sources.dart';
-    import '../../domain/repositories/repositories.dart';
+    // import '../sources/sources.dart';
+    // import '../../domain/repositories/repositories.dart';
     
-    class PoemRepositoryImp implements PoemRepository{
+    // class PoemRepositoryImp implements PoemRepository{
 
-        final PoemRemoteDataSource remoteDataSource;
-        PoemRepositoryImp({required this.remoteDataSource});
+    //     final PoemRemoteDataSource remoteDataSource;
+    //     PoemRepositoryImp({required this.remoteDataSource});
       
-        // ... example ...
-        //
-        // Future<User> getUser(String userId) async {
-        //     return remoteDataSource.getUser(userId);
-        //   }
-        // ...
-    }
+    //     // ... example ...
+    //     //
+    //     // Future<User> getUser(String userId) async {
+    //     //     return remoteDataSource.getUser(userId);
+    //     //   }
+    //     // ...
+    // }
     
