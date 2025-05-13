@@ -4,5 +4,6 @@
 // like we have fetch operation based on our entity structure.
 abstract class PoemRepository {
         Future<List<PoemEntity>> fetchPoemsByAuthor(String author);
+        Future<List<String>> fetchAuthors();
       }
     
