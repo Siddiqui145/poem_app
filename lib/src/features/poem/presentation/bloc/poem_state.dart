@@ -16,3 +16,8 @@ class PoemError extends PoemState {
   final String message;
   PoemError(this.message);
 }
+
+class AuthorsLoaded extends PoemState {
+  final List<String> authors;
+  AuthorsLoaded(this.authors);
+}
