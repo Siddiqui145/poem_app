@@ -12,6 +12,20 @@ class  PoemRemoteDataSource {
 
     PoemRemoteDataSource({required this.client});
 
+  Future<List<String>> getAuthors() async {
+  final url = Uri.parse('https://poetrydb.org/author');
+  final response = await client.get(url);
+
+  if (response.statusCode == 200) {
+    final data = json.decode(response.body);
+    final authors = List<String>.from(data['authors']);
+    return authors;
+  } else {
+    throw Exception('Failed to load authors');
+  }
+}
+
+
     Future<List<PoemModel>> getPoemsByAuthor(String author) async{
         final url = Uri.parse("https://poetrydb.org/author/$author");
         final response = await client.get(url);
