@@ -13,6 +13,7 @@ class PoemBloc extends Bloc<PoemEvent, PoemState> {
 
   PoemBloc({required this.fetchPoems}) : super(PoemInitial()) {
     on<FetchPoemsEvent>(_onFetchPoemsEvent);
+    on<ClosePoemsEvent>(_onClosePoemsEvent);
   }
 
   Future<void> _onFetchPoemsEvent(FetchPoemsEvent event, Emitter<PoemState> emit) async {
@@ -20,6 +21,15 @@ class PoemBloc extends Bloc<PoemEvent, PoemState> {
     try {
       final poems = await fetchPoems.execute(event.author);
       emit(PoemLoaded(poems));
+    } catch (e) {
+      emit(PoemError(e.toString()));
+    }
+  }
+
+  Future<void> _onClosePoemsEvent(ClosePoemsEvent event, Emitter<PoemState> emit) async {
+    emit(PoemLoading());
+    try {
+      emit(PoemInitial());
     } catch (e) {
       emit(PoemError(e.toString()));
     }

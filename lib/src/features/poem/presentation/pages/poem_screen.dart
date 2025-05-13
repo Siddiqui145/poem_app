@@ -11,12 +11,33 @@ class PoemScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Emily Dickinson Poems')),
+      appBar: AppBar(title: const Text('Emily Dickinson Poems'),
+      backgroundColor: Colors.lightBlue.shade100,
+      actions: [
+        IconButton(
+        onPressed: () {
+          context.read<PoemBloc>().add(FetchPoemsEvent('Emily Dickinson'));
+        },
+        icon: const Icon(Icons.refresh),
+      ),
+
+        IconButton(
+        onPressed: () {
+          context.read<PoemBloc>().add(ClosePoemsEvent());
+        },
+        icon: const Icon(Icons.close),
+      ),
+
+      ],),
       body: BlocBuilder<PoemBloc, PoemState>(
         builder: (context, state) {
           if (state is PoemLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is PoemLoaded) {
+          }
+          else if (state is PoemInitial){
+            return const Center(child: Text("Initial state"));
+          }
+           else if (state is PoemLoaded) {
             return ListView.builder(
               itemCount: state.poems.length,
               itemBuilder: (context, index) {
@@ -33,12 +54,7 @@ class PoemScreen extends StatelessWidget {
           return const Center(child: Text('Press the button to fetch poems'));
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.read<PoemBloc>().add(FetchPoemsEvent('Emily Dickinson'));
-        },
-        child: const Icon(Icons.refresh),
-      ),
+      
     );
   }
 }
