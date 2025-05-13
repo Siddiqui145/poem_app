@@ -17,4 +17,15 @@ import '../repositories/repositories.dart';
           return repository.fetchPoemsByAuthor(author);
         }
       }
+
+      class GetAuthorsUseCase {
+  final PoemRepository repository;
+
+  GetAuthorsUseCase({required this.repository});
+
+  Future<List<String>> execute() {
+    return repository.fetchAuthors();
+  }
+}
+
       
