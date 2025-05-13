@@ -8,3 +8,5 @@ class FetchPoemsEvent extends PoemEvent{
 }
 
 class ClosePoemsEvent extends PoemEvent{}
+
+class FetchAuthorsEvent extends PoemEvent{}
