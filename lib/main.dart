@@ -8,13 +8,16 @@ import 'package:poem_app/src/features/poem/presentation/bloc/poem_bloc.dart';
 import 'package:poem_app/src/features/poem/presentation/pages/poem_screen.dart';
 
 Future<void> main() async {
-   final client = http.Client();
+  final client = http.Client();
   final remoteDataSource = PoemRemoteDataSource(client: client);
   final poemRepository = PoemRepositoryImpl(remoteDataSource: remoteDataSource);
   final getPoemUseCase = GetPoemUseCase(repository: poemRepository);
 
+  final getAuthorsUseCase = GetAuthorsUseCase(repository: poemRepository);
+
+
   runApp(BlocProvider(
-    create: (_) => PoemBloc(fetchPoems: getPoemUseCase),
+    create: (_) => PoemBloc(fetchPoems: getPoemUseCase, fetchAuthors: getAuthorsUseCase),
     child: const MyApp()));
 }
 
