@@ -10,6 +10,12 @@ class PoemRepositoryImpl extends PoemRepository{
 
   PoemRepositoryImpl({required this.remoteDataSource});
 
+
+  @override
+  Future<List<String>> fetchAuthors() {
+    return remoteDataSource.getAuthors();
+  }
+
   @override
   Future<List<PoemEntity>> fetchPoemsByAuthor(String author) async{
     final poems = await remoteDataSource.getPoemsByAuthor(author);
