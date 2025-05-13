@@ -10,10 +10,12 @@ part 'poem_event.dart';
 
 class PoemBloc extends Bloc<PoemEvent, PoemState> {
   final GetPoemUseCase fetchPoems;
+  final GetAuthorsUseCase fetchAuthors;
 
-  PoemBloc({required this.fetchPoems}) : super(PoemInitial()) {
+  PoemBloc({required this.fetchPoems, required this.fetchAuthors}) : super(PoemInitial()) {
     on<FetchPoemsEvent>(_onFetchPoemsEvent);
     on<ClosePoemsEvent>(_onClosePoemsEvent);
+    on<FetchAuthorsEvent>(_onFetchAuthorsEvent);
   }
 
   Future<void> _onFetchPoemsEvent(FetchPoemsEvent event, Emitter<PoemState> emit) async {
@@ -31,6 +33,17 @@ class PoemBloc extends Bloc<PoemEvent, PoemState> {
     try {
       emit(PoemInitial());
     } catch (e) {
+      emit(PoemError(e.toString()));
+    }
+  }
+
+  Future<void> _onFetchAuthorsEvent(FetchAuthorsEvent event, Emitter<PoemState> emit) async{
+    emit(PoemLoading());
+    try{
+      final authors = await fetchAuthors.execute();
+      emit(AuthorsLoaded(authors));
+    }
+    catch(e){
       emit(PoemError(e.toString()));
     }
   }
